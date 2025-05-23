@@ -44,17 +44,24 @@ export default function Sidebar() {
       adminOnly: true,
     },
     {
+      href: "/admin/all-review-table",
+      label: "All Reviews",
+      adminOnly: true,
+    },
+    {
       href: "/admin/create-premium-review",
       label: "Create Premium review",
       adminOnly: true,
     },
     { href: "/admin/payments", label: "Payment Analytics", adminOnly: true },
+    { href: "/admin/contacts", label: "Contact Issue", adminOnly: true },
 
     // User-only links
     // { href: '/user/dashboard', label: 'Dashboard', userOnly: true },
     { href: "/user/reviews", label: "My Reviews", userOnly: true },
     { href: "/user/create-review", label: "Create Review", userOnly: true },
     { href: "/user/user-payment", label: "Payment History", userOnly: true },
+    { href: "/user/user-review", label: "Give a Review", userOnly: true },
   ];
 
   // Filter links based on user role

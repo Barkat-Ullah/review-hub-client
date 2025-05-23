@@ -1,3 +1,4 @@
+"use client";
 import { dateFormatter } from "@/lib/dateFormatter";
 import { IReview } from "@/types/review";
 import { Star } from "lucide-react";
@@ -9,7 +10,7 @@ const ReviewCard = ({ review }: { review: IReview }) => {
   return (
     <Link
       href={`/reviews/${review.id}`}
-      className="p-8 bg-black/5 dark:bg-white/10 rounded-xl"
+      className="p-8 bg-primary/5 dark:bg-primary/10 rounded-xl"
     >
       <div className="w-full bg-black/5 dark:bg-white/5 min-h-[200px] rounded-tl-xl rounded-tr-xl relative">
         {review.imageUrls.length > 0 && (

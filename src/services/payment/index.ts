@@ -164,22 +164,3 @@ export const createPremiumReview = async (formData: FormData) => {
     return { success: false, message: error.message || "An error occurred" };
   }
 };
-// export const createPremiumReview = async (formData: FormData) => {
-//   try {
-//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews`, {
-//       method: "POST",
-//       headers: {
-//         Authorization: (await cookies()).get("accessToken")!.value,
-//         // "Content-Type": "multipart/form-data",
-//       },
-
-//       body: formData,
-//     });
-
-//     const result = await res.json();
-//     return result;
-//   } catch (error: any) {
-//     console.error("API error:", error);
-//     return { success: false, message: error.message || "An error occurred" };
-//   }
-// };

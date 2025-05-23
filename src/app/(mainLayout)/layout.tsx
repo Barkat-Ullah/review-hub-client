@@ -8,7 +8,7 @@ const layout = ({
   return (
     <div>
       <Navbar></Navbar>
-      <div className="min-h-[100vh-200px]">{children}</div>
+      <main className="min-h-screen">{children}</main>
       <Footer></Footer>
     </div>
   );

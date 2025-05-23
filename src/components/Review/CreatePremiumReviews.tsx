@@ -79,7 +79,7 @@ export default function CreateReviewForm({
       rating: 0,
       purchaseSource: "",
       categoryId: "",
-      status: "DRAFT",
+      status: "PENDING",
       isPremium: false,
       price: undefined,
       premiumPrice: undefined,
@@ -92,6 +92,7 @@ export default function CreateReviewForm({
   // Handle form submission
   const onSubmit = async (values: ReviewFormValues) => {
     try {
+      setIsSubmitting(true);
       // Additional validation for premium price
       if (
         values.isPremium &&
@@ -103,8 +104,6 @@ export default function CreateReviewForm({
         });
         return;
       }
-
-      setIsSubmitting(true);
 
       // Create FormData for file uploads
       const formData = new FormData();
@@ -401,36 +400,6 @@ export default function CreateReviewForm({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="DRAFT">
-                          <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="bg-slate-100">
-                              Draft
-                            </Badge>
-                            <span>Save without publishing</span>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="PUBLISHED">
-                          <div className="flex items-center gap-2">
-                            <Badge
-                              variant="outline"
-                              className="bg-green-100 text-green-800"
-                            >
-                              Published
-                            </Badge>
-                            <span>Make visible to all users</span>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="UNPUBLISHED">
-                          <div className="flex items-center gap-2">
-                            <Badge
-                              variant="outline"
-                              className="bg-red-100 text-red-800"
-                            >
-                              Unpublished
-                            </Badge>
-                            <span>Hide from users</span>
-                          </div>
-                        </SelectItem>
                         <SelectItem value="PENDING">
                           <div className="flex items-center gap-2">
                             <Badge

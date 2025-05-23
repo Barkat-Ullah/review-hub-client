@@ -55,6 +55,7 @@ interface AdminPaymentHistoryProps {
 const AdminPaymentHistory: React.FC<AdminPaymentHistoryProps> = ({
   payments,
 }) => {
+  console.log(payments);
   const [searchTerm, setSearchTerm] = useState("");
 
   // Search Functionality

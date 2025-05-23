@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use server';
+"use server";
 
-import { revalidateTag } from 'next/cache';
-import { cookies } from 'next/headers';
+import { revalidateTag } from "next/cache";
+import { cookies } from "next/headers";
 
 // get all reviews
 export const getAllReviews = async (
@@ -12,19 +12,19 @@ export const getAllReviews = async (
 ) => {
   const params = new URLSearchParams();
   if (query?.rating) {
-    params.append('rating', query?.rating.toString());
+    params.append("rating", query?.rating.toString());
   }
 
   if (query?.category) {
-    params.append('category', query?.category.toString());
+    params.append("category", query?.category.toString());
   }
 
   if (query?.sortBy) {
-    params.append('sortBy', query?.sortBy.toString());
+    params.append("sortBy", query?.sortBy.toString());
   }
 
   if (query?.searchTerm) {
-    params.append('searchTerm', query?.searchTerm.toString());
+    params.append("searchTerm", query?.searchTerm.toString());
   }
 
   try {
@@ -32,7 +32,7 @@ export const getAllReviews = async (
       `${process.env.NEXT_PUBLIC_API_URL}/reviews?limit=${limit}&page=${page}&${params}`,
       {
         next: {
-          tags: ['REVIEW'],
+          tags: ["REVIEW"],
         },
       }
     );
@@ -44,16 +44,19 @@ export const getAllReviews = async (
 };
 
 export const getAllReviewsForAdmin = async () => {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+  const accessToken = (await cookies()).get("accessToken")?.value;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews/admin`, {
-      headers: {
-        Authorization: `${accessToken}`,
-      },
-      next: {
-        tags: ['REVIEW'],
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/reviews/admin`,
+      {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+        next: {
+          tags: ["REVIEW"],
+        },
+      }
+    );
     const data = await res.json();
     return data;
   } catch (error: any) {
@@ -61,17 +64,20 @@ export const getAllReviewsForAdmin = async () => {
   }
 };
 
-export const getSingleUserReviews = async (id : string) => {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+export const getSingleUserReviews = async (id: string) => {
+  const accessToken = (await cookies()).get("accessToken")?.value;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews/user/${id}`, {
-      headers: {
-        Authorization: `${accessToken}`,
-      },
-      next: {
-        tags: ['REVIEW'],
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/reviews/user/${id}`,
+      {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+        next: {
+          tags: ["REVIEW"],
+        },
+      }
+    );
     const data = await res.json();
     return data;
   } catch (error: any) {
@@ -79,34 +85,40 @@ export const getSingleUserReviews = async (id : string) => {
   }
 };
 export const deleteReview = async (reviewId: string) => {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+  const accessToken = (await cookies()).get("accessToken")?.value;
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews/${reviewId}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `${accessToken}`,
-      },
-      next: {
-        tags: ['REVIEW'],
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/reviews/${reviewId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+        next: {
+          tags: ["REVIEW"],
+        },
+      }
+    );
 
     if (!res.ok) {
       const errorData = await res.json();
-      return { success: false, error: errorData.message || 'Failed to delete review' };
+      return {
+        success: false,
+        error: errorData.message || "Failed to delete review",
+      };
     }
 
-    revalidateTag('REVIEW');
+    revalidateTag("REVIEW");
 
-    return { success: true, message: 'Review deleted successfully' };
+    return { success: true, message: "Review deleted successfully" };
   } catch (error: any) {
-    return { success: false, error: error?.message || 'Something went wrong' };
+    return { success: false, error: error?.message || "Something went wrong" };
   }
 };
 
 export const getReviewById = async (reviewId: string) => {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+  const accessToken = (await cookies()).get("accessToken")?.value;
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/reviews/${reviewId}`,
@@ -115,7 +127,7 @@ export const getReviewById = async (reviewId: string) => {
           Authorization: `${accessToken}`,
         },
         next: {
-          tags: ['REVIEW'],
+          tags: ["REVIEW"],
         },
       }
     );
@@ -127,25 +139,25 @@ export const getReviewById = async (reviewId: string) => {
 };
 
 export const makeVote = async (reviewId: string, voteType: string) => {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+  const accessToken = (await cookies()).get("accessToken")?.value;
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/votes/${reviewId}`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `${accessToken}`,
         },
         body: JSON.stringify({ vote: voteType }),
-        credentials: 'include',
+        credentials: "include",
         next: {
-          tags: ['REVIEW'],
+          tags: ["REVIEW"],
         },
       }
     );
 
-    revalidateTag('REVIEW');
+    revalidateTag("REVIEW");
 
     const data = await res.json();
     return data;
@@ -154,54 +166,54 @@ export const makeVote = async (reviewId: string, voteType: string) => {
   }
 };
 export const approveReview = async (reviewId: string) => {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+  const accessToken = (await cookies()).get("accessToken")?.value;
 
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/reviews/${reviewId}/approve`,
       {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
           Authorization: `${accessToken}`,
         },
         next: {
-          tags: ['REVIEW'],
+          tags: ["REVIEW"],
         },
       }
     );
 
     const data = await res.json();
-    revalidateTag('REVIEW');
+    revalidateTag("REVIEW");
     return { success: true, data };
   } catch (error: any) {
-    return { success: false, error: error?.message || 'Something went wrong' };
+    return { success: false, error: error?.message || "Something went wrong" };
   }
 };
 
 export const rejectReview = async (reviewId: string, reason: string) => {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+  const accessToken = (await cookies()).get("accessToken")?.value;
 
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/reviews/${reviewId}/reject`,
       {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `${accessToken}`,
         },
         body: JSON.stringify({ reason }),
         next: {
-          tags: ['REVIEW'],
+          tags: ["REVIEW"],
         },
       }
     );
 
     const data = await res.json();
-    revalidateTag('REVIEW');
+    revalidateTag("REVIEW");
     return { success: true, data };
   } catch (error: any) {
-    return { success: false, error: error?.message || 'Something went wrong' };
+    return { success: false, error: error?.message || "Something went wrong" };
   }
 };
 
@@ -214,16 +226,13 @@ export const createNormalReview = async (formData: FormData) => {
       purchaseSource: (formData.get("purchaseSource") as string) || "",
       categoryId: formData.get("categoryId") as string,
       status: formData.get("status") as string,
-      isPremium: false, 
+      isPremium: false,
     };
 
-   
     const processedFormData = new FormData();
 
-    
     processedFormData.append("data", JSON.stringify(reviewData));
 
-   
     const files = formData.getAll("imageUrls");
     files.forEach((file) => {
       if (file instanceof File) {
@@ -240,7 +249,7 @@ export const createNormalReview = async (formData: FormData) => {
     });
 
     const result = await res.json();
-    revalidateTag('REVIEW');
+    revalidateTag("REVIEW");
     return result;
   } catch (error: any) {
     console.error("API error:", error);
@@ -248,11 +257,8 @@ export const createNormalReview = async (formData: FormData) => {
   }
 };
 
-export const updateReview = async (
-  reviewId: string,
-  formData: FormData
-) => {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+export const updateReview = async (reviewId: string, formData: FormData) => {
+  const accessToken = (await cookies()).get("accessToken")?.value;
 
   try {
     // Extract data from FormData and create a properly typed object
@@ -279,27 +285,32 @@ export const updateReview = async (
       }
     });
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews/${reviewId}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `${accessToken}`,
-      },
-      body: processedFormData,
-      next: {
-        tags: ['REVIEW'],
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/reviews/${reviewId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+        body: processedFormData,
+        next: {
+          tags: ["REVIEW"],
+        },
+      }
+    );
 
     if (!res.ok) {
       const errorData = await res.json();
-      return { success: false, error: errorData.message || 'Failed to update review' };
+      return {
+        success: false,
+        error: errorData.message || "Failed to update review",
+      };
     }
 
     const data = await res.json();
-    revalidateTag('REVIEW');
+    revalidateTag("REVIEW");
     return { success: true, data };
   } catch (error: any) {
-    return { success: false, error: error?.message || 'Something went wrong' };
+    return { success: false, error: error?.message || "Something went wrong" };
   }
 };
-

@@ -14,6 +14,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import login from "../../assests/login.jpg";
+import Image from "next/image";
 
 type FormData = {
   email: string;
@@ -65,7 +67,7 @@ export default function Login() {
   };
 
   return (
-    <div className="container flex h-screen w-full  mx-auto flex-col items-center justify-center">
+    <div className="flex max-w-7xl mt-25 mx-auto lg:flex-row items-center justify-center px-2 lg:px-4">
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
         <Button variant="ghost">
           <svg
@@ -86,6 +88,16 @@ export default function Login() {
           Back
         </Button>
       </Link>
+      <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center ">
+        <Image
+          src={login}
+          alt="Login illustration"
+          width={400}
+          height={400}
+          className="object-cover rounded-lg "
+          priority
+        />
+      </div>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:max-w-[550px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">

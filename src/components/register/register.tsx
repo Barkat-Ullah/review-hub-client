@@ -14,6 +14,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import registerImg from "../../assests/register.jpg";
+import Image from "next/image";
 
 type FormData = {
   username: string;
@@ -59,7 +61,7 @@ const Register = () => {
   };
 
   return (
-    <div className="container flex mx-auto h-screen w-screen flex-col items-center justify-center">
+    <div className="flex max-w-7xl  my-10 mx-auto lg:flex-row items-center justify-center px-2 lg:px-4">
       <ToastContainer />
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
         <Button variant="ghost">
@@ -81,6 +83,16 @@ const Register = () => {
           Back
         </Button>
       </Link>
+      <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center ">
+        <Image
+          src={registerImg}
+          alt="Login illustration"
+          width={500}
+          height={500}
+          className="object-cover rounded-lg "
+          priority
+        />
+      </div>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:max-w-[550px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
