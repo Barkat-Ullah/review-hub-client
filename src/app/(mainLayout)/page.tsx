@@ -10,12 +10,13 @@ import RHContainer from "@/components/ui/core/RHContainer";
 import { getAllReviews } from "@/services/review";
 import { getAllTestimonials } from "@/services/testimonial";
 export default async function Home() {
-  const { data: response } = await getAllReviews("1", "6", {
-    sortBy: "mostPopular",
-  });
-  const { data: responses } = await getAllReviews("1", "20");
+  const { data: response } =
+    (await getAllReviews("1", "6", {
+      sortBy: "mostPopular",
+    })) || [];
+  const { data: responses } = (await getAllReviews("1", "20")) || [];
 
-  const { data: testimonials } = await getAllTestimonials();
+  const { data: testimonials } = (await getAllTestimonials()) || [];
 
   return (
     <RHContainer>

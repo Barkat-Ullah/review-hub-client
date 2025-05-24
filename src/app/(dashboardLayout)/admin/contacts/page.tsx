@@ -3,7 +3,7 @@ import { getAllContact } from "@/services/testimonial";
 import React from "react";
 
 const AllContacts = async () => {
-  const { data: contacts } = await getAllContact();
+  const { data: contacts } = (await getAllContact()) || [];
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">

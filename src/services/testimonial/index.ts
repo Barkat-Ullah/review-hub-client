@@ -84,7 +84,7 @@ export const getAllContact = async () => {
       throw new Error("Failed to fetch contacts");
     }
 
-    const response = await res.json();
+    const response = (await res.json()) || [];
     return response;
   } catch (error: any) {
     console.error("Error fetching Contacts:", error);
