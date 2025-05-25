@@ -10,13 +10,32 @@ import RHContainer from "@/components/ui/core/RHContainer";
 import { getAllReviews } from "@/services/review";
 import { getAllTestimonials } from "@/services/testimonial";
 export default async function Home() {
-  const { data: response } =
-    (await getAllReviews("1", "6", {
-      sortBy: "mostPopular",
-    })) || [];
-  const { data: responses } = (await getAllReviews("1", "20")) || [];
+  let response = [];
+  let responses = [];
+  let testimonials = [];
 
-  const { data: testimonials } = (await getAllTestimonials()) || [];
+  try {
+    const reviewsResult = await getAllReviews("1", "6", {
+      sortBy: "mostPopular",
+    });
+    response = reviewsResult?.data || [];
+  } catch (error) {
+    console.error("Error fetching popular reviews:", error);
+  }
+
+  try {
+    const allReviewsResult = await getAllReviews("1", "20");
+    responses = allReviewsResult?.data || [];
+  } catch (error) {
+    console.error("Error fetching all reviews:", error);
+  }
+
+  try {
+    const testimonialsResult = await getAllTestimonials();
+    testimonials = testimonialsResult?.data || [];
+  } catch (error) {
+    console.error("Error fetching testimonials:", error);
+  }
 
   return (
     <RHContainer>

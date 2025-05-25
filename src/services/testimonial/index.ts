@@ -27,7 +27,7 @@ export const createTestimonial = async (data: {
 export const getAllTestimonials = async () => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/testimonial`);
-    const response = await res.json();
+    const response = (await res.json()) || [];
     return response;
   } catch (error: any) {
     console.error("Error fetching Payments:", error);

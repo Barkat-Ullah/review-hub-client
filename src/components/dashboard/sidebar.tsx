@@ -37,6 +37,8 @@ export default function Sidebar() {
   const allLinks: NavLink[] = [
     // Admin-only links
     { href: "/admin/dashboard", label: "Dashboard", adminOnly: true },
+    { href: "/admin/profile", label: "Profile", adminOnly: true },
+    { href: "/admin/all-user", label: "User Management", adminOnly: true },
     { href: "/admin/reviews", label: "Review Management", adminOnly: true },
     {
       href: "/admin/create-categories",
@@ -57,7 +59,7 @@ export default function Sidebar() {
     { href: "/admin/contacts", label: "Contact Issue", adminOnly: true },
 
     // User-only links
-    // { href: '/user/dashboard', label: 'Dashboard', userOnly: true },
+    { href: "/user/profile", label: "Profile", userOnly: true },
     { href: "/user/reviews", label: "My Reviews", userOnly: true },
     { href: "/user/create-review", label: "Create Review", userOnly: true },
     { href: "/user/user-payment", label: "Payment History", userOnly: true },

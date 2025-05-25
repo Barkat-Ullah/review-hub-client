@@ -94,7 +94,7 @@ const CommentSection = ({
     };
   }, []);
   return (
-    <section className="my-20" ref={commentRef}>
+    <section className="my-20 px-4" ref={commentRef}>
       <h2 className="text-2xl font-semibold mb-3 container mx-auto">
         Comments
       </h2>

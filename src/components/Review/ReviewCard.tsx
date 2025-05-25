@@ -4,7 +4,7 @@ import { IReview } from "@/types/review";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { BiDownvote, BiUpvote } from "react-icons/bi";
+import { BiLike, BiDislike } from "react-icons/bi";
 
 const ReviewCard = ({ review }: { review: IReview }) => {
   return (
@@ -45,10 +45,10 @@ const ReviewCard = ({ review }: { review: IReview }) => {
       <div className="flex  items-center justify-between gap-2">
         <div className="flex gap-4">
           <span className="flex items-center gap-1 text-[17px]">
-            <BiUpvote /> {review.voteInfo.upvotes}
+            <BiLike /> {review.voteInfo.upvotes}
           </span>
           <span className="flex items-center gap-1 text-[17px]">
-            <BiDownvote /> {review.voteInfo.downvotes}
+            <BiDislike /> {review.voteInfo.downvotes}
           </span>
         </div>
         <p className="text-sm">

@@ -128,12 +128,12 @@ const GetAllContact: React.FC<GetAllContactProps> = ({ contacts }) => {
         {isOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
             <div className="py-2">
-              {statusOptions.map((status) => (
+              {statusOptions?.map((status) => (
                 <button
                   key={status}
                   onClick={() => {
                     handleStatusUpdate(
-                      contact.id,
+                      contact?.id,
                       status as ContactFormData["status"]
                     );
                     setIsOpen(false);
@@ -158,8 +158,8 @@ const GetAllContact: React.FC<GetAllContactProps> = ({ contacts }) => {
   const filteredContacts =
     filter === "ALL"
       ? contactList
-      : contactList.filter(
-          (contact) => (contact.status || "PENDING") === filter
+      : contactList?.filter(
+          (contact) => (contact?.status || "PENDING") === filter
         );
 
   return (
@@ -180,8 +180,8 @@ const GetAllContact: React.FC<GetAllContactProps> = ({ contacts }) => {
               {status === "ALL" ? "All Contacts" : status.replace("_", " ")}
               <span className="ml-2 px-2 py-1 bg-white rounded-full text-xs">
                 {status === "ALL"
-                  ? contactList.length
-                  : contactList.filter(
+                  ? contactList?.length
+                  : contactList?.filter(
                       (c) => (c.status || "PENDING") === status
                     ).length}
               </span>
@@ -192,9 +192,9 @@ const GetAllContact: React.FC<GetAllContactProps> = ({ contacts }) => {
 
       {/* Contact Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredContacts.map((contact) => (
+        {filteredContacts?.map((contact) => (
           <div
-            key={contact.id}
+            key={contact?.id}
             className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200"
           >
             {/* Card Header */}
@@ -206,22 +206,22 @@ const GetAllContact: React.FC<GetAllContactProps> = ({ contacts }) => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">
-                      {contact.name}
+                      {contact?.name}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
-                      {getStatusIcon(contact.status)}
+                      {getStatusIcon(contact?.status)}
                       <span className="text-sm text-gray-500">
-                        {(contact.status || "PENDING").replace("_", " ")}
+                        {(contact?.status || "PENDING").replace("_", " ")}
                       </span>
                     </div>
                   </div>
                 </div>
                 <span
                   className={`px-2 py-1 text-xs font-medium rounded-full border ${getPriorityColor(
-                    contact.priority
+                    contact?.priority
                   )}`}
                 >
-                  {contact.priority}
+                  {contact?.priority}
                 </span>
               </div>
 
@@ -229,16 +229,16 @@ const GetAllContact: React.FC<GetAllContactProps> = ({ contacts }) => {
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2 text-gray-600">
                   <Mail className="w-4 h-4" />
-                  <span className="truncate">{contact.email}</span>
+                  <span className="truncate">{contact?.email}</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-600">
                   <Phone className="w-4 h-4" />
-                  <span>{contact.phone}</span>
+                  <span>{contact?.phone}</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-600">
                   <Calendar className="w-4 h-4" />
                   <span>
-                    {new Date(contact.createdAt).toLocaleDateString()}
+                    {new Date(contact?.createdAt).toLocaleDateString()}
                   </span>
                 </div>
               </div>
@@ -252,20 +252,20 @@ const GetAllContact: React.FC<GetAllContactProps> = ({ contacts }) => {
                   <Tag className="w-4 h-4 text-gray-400" />
                   <span
                     className={`px-2 py-1 text-xs font-medium rounded-full border ${getCategoryColor(
-                      contact.category
+                      contact?.category
                     )}`}
                   >
-                    {contact.category.replace("_", " ")}
+                    {contact?.category.replace("_", " ")}
                   </span>
                 </div>
                 <div>
                   <h4 className="font-medium text-gray-900 mb-2">
-                    {contact.subject}
+                    {contact?.subject}
                   </h4>
                   <div className="flex items-start gap-2">
                     <MessageSquare className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
                     <p className="text-sm text-gray-600 line-clamp-3">
-                      {contact.message}
+                      {contact?.message}
                     </p>
                   </div>
                 </div>
@@ -291,7 +291,7 @@ const GetAllContact: React.FC<GetAllContactProps> = ({ contacts }) => {
       </div>
 
       {/* Empty State */}
-      {filteredContacts.length === 0 && (
+      {filteredContacts?.length === 0 && (
         <div className="text-center py-12">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <MessageSquare className="w-8 h-8 text-gray-400" />

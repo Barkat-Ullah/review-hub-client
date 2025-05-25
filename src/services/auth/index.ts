@@ -17,6 +17,9 @@ export const registerUser = async (userData: FieldValues) => {
       }
     );
     const result = await res.json();
+    if (result.success) {
+      (await cookies()).set("accessToken", result?.data?.accessToken);
+    }
     return result;
   } catch (error: any) {
     return Error(error);
@@ -38,6 +41,47 @@ export const loginUser = async (userData: FieldValues) => {
     return result;
   } catch (error: any) {
     return Error(error);
+  }
+};
+
+export const getMyProfile = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
+      headers: {
+        Authorization: (await cookies()).get("accessToken")!.value,
+        "Content-Type": "application/json",
+      },
+    });
+    // console.log(res);
+    const result = await res.json();
+    // console.log(result);
+
+    return result.data;
+  } catch (error: any) {
+    console.error(error);
+  }
+};
+
+export const getAllUser = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
+      method: "GET",
+      headers: {
+        Authorization: (await cookies()).get("accessToken")?.value || "",
+      },
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("API Error Response:", errorText);
+      return [];
+    }
+
+    const result = await res.json();
+    return result.data || [];
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return [];
   }
 };
 

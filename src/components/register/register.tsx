@@ -34,29 +34,25 @@ const Register = () => {
     getValues,
     formState: { isSubmitting, errors },
   } = useForm<FormData>();
-  const { setIsLoading } = useUser();
+  const { setIsLoading, updateUser } = useUser();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const onSubmit = async (data: FormData) => {
     try {
+      setIsLoading(true);
       // TODO: Replace with your API logic
       const res = await registerUser(data);
-      console.log(data);
-      setIsLoading(true);
-      if (res.success) {
-        toast.success(res.message);
-        router.push("/auth/login");
+      // console.log(data);
+
+      if (res?.success) {
+        toast.success(res?.message);
+        await updateUser();
+        router.push("/");
       }
     } catch (error: any) {
-      console.log(error);
-      toast.error(
-        "There was a problem creating your account. Please try again.",
-        {
-          position: "top-center",
-          autoClose: 3000,
-        }
-      );
+      console.error(error);
+      toast.error("something went wrong");
     }
   };
 

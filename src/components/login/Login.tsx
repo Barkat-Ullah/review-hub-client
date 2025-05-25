@@ -30,7 +30,7 @@ export default function Login() {
     reset,
     formState: { isSubmitting },
   } = useForm<FormData>();
-  const { setIsLoading } = useUser();
+  const { setIsLoading, updateUser } = useUser();
 
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirectPath");
@@ -45,6 +45,7 @@ export default function Login() {
       if (res?.success) {
         toast.success(res?.message);
         reset();
+        await updateUser();
         if (redirect) {
           router.push(redirect);
         } else {

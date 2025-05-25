@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,7 +18,6 @@ import { logout } from "@/services/auth";
 import { toast } from "react-toastify";
 
 export default function Navbar() {
-  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const { setTheme } = useTheme();
@@ -27,12 +26,10 @@ export default function Navbar() {
     try {
       await logout();
       toast.success("Logged out successfully.");
-      router.push("/auth/login");
+      setIsLoading(true);
     } catch (error: any) {
       toast.error(error?.message || "Failed to logout. Please try again.");
     }
-
-    setIsLoading(true);
   };
   const routes = [
     { href: "/", label: "Home" },

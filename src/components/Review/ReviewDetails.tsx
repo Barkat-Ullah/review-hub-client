@@ -8,7 +8,8 @@ import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { BiCommentDots, BiDownvote, BiUpvote } from "react-icons/bi";
+import { BiCommentDots } from "react-icons/bi";
+import { BiLike, BiDislike } from "react-icons/bi";
 import { MdLock } from "react-icons/md";
 import { toast } from "react-toastify";
 import CommentSection from "../Comments/CommentSection";
@@ -78,7 +79,7 @@ const ReviewDetails = ({
   };
   return (
     <>
-      <div className="container mx-auto my-10">
+      <div className="container mx-auto my-10 px-4">
         <div className="relative w-full bg-black/10 dark:bg-white/10 h-[450px] min-h-[450px] rounded-xl">
           {review.imageUrls.length > 0 && (
             <Image
@@ -129,7 +130,7 @@ const ReviewDetails = ({
               onClick={() => handleVote("UPVOTE")}
               className="flex items-center gap-1 text-xl group"
             >
-              <BiUpvote
+              <BiLike
                 className={`text-2xl group-hover:fill-amber-400 duration-300 cursor-pointer  ${
                   voteInfo.isUpVote && "fill-amber-400"
                 }`}
@@ -140,7 +141,7 @@ const ReviewDetails = ({
               onClick={() => handleVote("DOWNVOTE")}
               className="flex items-center gap-1 text-xl group"
             >
-              <BiDownvote
+              <BiDislike
                 className={`text-2xl group-hover:fill-amber-400 duration-300 cursor-pointer ${
                   voteInfo.isDownVote && "fill-amber-400"
                 }`}

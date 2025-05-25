@@ -8,7 +8,7 @@ import { Star } from "lucide-react";
 
 const Banner = () => {
   return (
-    <section className="bg-gradient-to-b from-primary/5 to-white dark:from-gray-900 dark:to-gray-600 py-12 lg:py-28">
+    <section className="bg-gradient-to-b from-primary/5 to-white dark:from-gray-900 dark:to-gray-600 py-12 lg:py-20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col-reverse md:flex-row gap-10 lg:gap-12 items-center">
           <div className="flex flex-col justify-center space-y-4">

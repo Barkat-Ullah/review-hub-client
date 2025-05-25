@@ -154,7 +154,7 @@ export default function TestimonialSlider({
   }
 
   // Handle case where testimonials array might be empty
-  if (!testimonials || testimonials.length === 0) {
+  if (!testimonials || testimonials?.length === 0) {
     return (
       <div className="py-12 md:py-16 bg-gray-50 text-center">
         No testimonials available.
