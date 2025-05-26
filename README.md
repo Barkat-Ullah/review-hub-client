@@ -4,7 +4,7 @@ Welcome to the **ReviewHub** repository! This is the frontend application of the
 
 ## Live Demo
 Check out the live version of the site:
-[Product Review Portal](https://reviewhub-eight.vercel.app/)
+[Product Review Portal](https://review-hub-ruby.vercel.app)
 
 ## Features
 ### User Features
