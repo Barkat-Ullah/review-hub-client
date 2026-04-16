@@ -8,6 +8,12 @@
 Check out the live version:
 [ReviewHub - Product Review Portal](https://review-hub-ruby.vercel.app)
 
+## 🔐 Demo Credentials
+
+### Admin Access
+- **Email:** `admin@example.com`
+- **Password:** `admin123`
+
 ---
 
 ## ✨ Key Features
